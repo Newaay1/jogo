@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="javascript.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Jogo dos dentes</title>
+</head>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    background: rgb(180,180,180);
+    background: linear-gradient(90deg, rgb(227, 251, 252) 10%, rgb(227, 251, 252) 90%);
+}
+
+.titulo {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(67, 195, 255);
+    font-size: 40px;
+    margin-top: 30px;
+    font-weight: 700;
+}
+
+.caixas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinhar ao topo */
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.caixa1, .caixa2{
+    width: 500px;
+    height: 500px;
+    border: solid rgba(2, 114, 129, 0.589) 2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px;
+}
+
+.caixa1 img, .caixa2 img {
+    margin: 10px;
+}
+
+img[draggable="true"] {
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%;
+    border: solid 2px;
+    margin-top: 30px;
+}
+
+
+
+.comidasdrag, .comidasdrag2 {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+img[draggable="true"] {
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%;
+    border: solid 2px;
+}
+
+.pergunta{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 117, 172);
+    font-size: 35px;
+    margin-top: 32px;
+    font-weight: 700;
+}
+.maternal{
+    background:none;
+    color: rgb(2, 83, 121);
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+#burguer1, #cachorroquente1, #rosca1, #coca1, #cookie1, #fritas1, #sorvete1, #pizza1 {
+    max-width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    visibility: hidden;
+}
+#maca1, #brocolis1, #abacate1, #pera1, #laranja1, #morango1, #cenoura1, #uva1{
+    max-width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    visibility: hidden;   
+}
+
+.logo{
+    position: fixed;
+    top: 0;
+    width: 128px;
+    background: none;
+}
+
+
+@media screen and (max-width: 1680px){ 
+   *{
+    zoom: 95%;
+   }
+}
+@media screen and (max-width: 1280px){ 
+   *{
+    zoom: 92%;
+   }
+}
+
+@media screen and (max-width: 840px){ 
+   *{
+    zoom: 90%;
+   }
+   .logo{
+    width: 64px;
+   }
+}
+
+@media screen and (max-width: 500px){ 
+   *{
+    zoom: 85%;
+   }
+   .logo{
+    width: 64px;
+    left: 48%;
+   }
+   .caixa1, .caixa2{
+    width: 350px;
+   }
+   .caixa1{
+    margin-left: 100px;
+   }
+   .caixa2{
+    margin-right: 20px;
+   }
+   #burguer1, #cachorroquente1, #rosca1, #coca1, #cookie1, #fritas1, #sorvete1, #pizza1 {
+    max-width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    visibility: visible;
+}
+#maca1, #brocolis1, #abacate1, #pera1, #laranja1, #morango1, #cenoura1, #uva1{
+    max-width: 100px;
+    border-radius: 50%;
+    border: solid 2px;
+    visibility: visible;   
+}
+
+.comidasdrag, .comidasdrag2 {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    zoom: 70%;
+    margin-left: 50px;
+}
+
+img[draggable="true"] {
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%;
+    border: solid 2px;
+}
+
+}
+
+
+</style>
+
+
+
+
+</style>
+
+<body>
+    <img src="assets/logo-removebg-preview.png"  class="logo">
+    <span class="titulo">PROJETO MEU CORPINHO - <span class="maternal">MATERNAL III BEE E BIRD</span></span>
+    <span class="pergunta">QUAIS SÃO OS ALIMENTOS QUE AUXILIAM NA PROMOÇÃO DA SAÚDE BUCAL?</span>
+    <div class="caixas">
+        <div class="caixa1" id="caixa1" data-correct="true">
+            <div class="imagenscx1">
+                <img src="assets/dente-novo-feliz.png" alt="">
+                <img src="assets/maca.png" id="maca1">
+                <img src="assets/brocolis.png" id="brocolis1">
+                <img src="assets/abacate.png" id="abacate1">
+                <img src="assets/pera.png" id="pera1">
+                <img src="assets/laranja.png" id="laranja1">
+                <img src="assets/morango.png" id="morango1">
+                <img src="assets/cenoura.png" id="cenoura1">
+                <img src="assets/Uva.png" id="uva1">
+            </div>
+        </div>
+        <div class="caixa2" id="caixa2">
+            <div class="imagenscx2">
+                <img src="assets/dentao-novo-triste.png" alt="">
+                <img src="assets/Burguer.png" id="burguer1">
+                <img src="assets/CachorroQuente.png" id="cachorroquente1">
+                <img src="assets/rOSCA.png" id="rosca1">
+                <img src="assets/Coca.png" id="coca1">
+                <img src="assets/cookie.png" id="cookie1">
+                <img src="assets/Fritas.png" id="fritas1">
+                <img src="assets/Pizza.png" id="pizza1">
+                <img src="assets/Sorvete.png" id="sorvete1">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="comidasdrag">
+        <img src="assets/maca.png" id="maca" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/brocolis.png" id="brocolis" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/abacate.png" id="abacate" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/pera.png" id="pera" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/laranja.png" id="laranja" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/morango.png" id="morango" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/cenoura.png" id="cenoura" data-target="caixa1" alt="" draggable="true">
+        <img src="assets/uva.png" id="uva" data-target="caixa1" alt="" draggable="true">
+    </div>
+    <div class="comidasdrag2">
+        <img src="assets/Burguer.png" id="burguer" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/CachorroQuente.png" id="cachorroquente" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/rOSCA.png" id="rosca" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/Coca.png" id="coca" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/cookie.png" id="cookie" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/Fritas.png" id="fritas" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/Pizza.png" id="pizza" data-target="caixa2" alt="" draggable="true">
+        <img src="assets/Sorvete.png" id="sorvete" data-target="caixa2" alt="" draggable="true">
+    </div>
+
+    <audio id="correct-sound" src="assets/correto.mp3"></audio>
+    <audio id="incorrect-sound" src="assets/erro.mp3"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const correctSound = document.getElementById('correct-sound');
+            const incorrectSound = document.getElementById('incorrect-sound');
+            const items = document.querySelectorAll('[draggable="true"]');
+            const caixas = document.querySelectorAll('.caixa1, .caixa2');
+
+            let draggedElement = null;
+
+            items.forEach(item => {
+                item.addEventListener('dragstart', dragStart);
+                item.addEventListener('touchstart', touchStart);
+                item.addEventListener('touchmove', touchMove);
+                item.addEventListener('touchend', touchEnd);
+            });
+
+            caixas.forEach(caixa => {
+                caixa.addEventListener('dragover', dragOver);
+                caixa.addEventListener('drop', drop);
+                caixa.addEventListener('touchmove', dragOver);
+                caixa.addEventListener('touchend', drop);
+            });
+
+            function dragStart(e) {
+                draggedElement = e.target;
+                e.dataTransfer.setData('text/plain', e.target.id);
+            }
+
+            function touchStart(e) {
+                draggedElement = e.target;
+                e.target.style.opacity = '0.5';
+            }
+
+            function touchMove(e) {
+                e.preventDefault();
+                const touch = e.targetTouches[0];
+                const dropzone = document.elementFromPoint(touch.clientX, touch.clientY).closest('.caixa1, .caixa2');
+                if (dropzone) {
+                    dropzone.style.background = '#f0f0f0'; // Realçar a zona de soltura
+                }
+            }
+
+            function touchEnd(e) {
+                e.preventDefault();
+                const touch = e.changedTouches[0];
+                const dropzone = document.elementFromPoint(touch.clientX, touch.clientY).closest('.caixa1, .caixa2');
+
+                if (dropzone && dropzone.id === draggedElement.dataset.target) {
+                    correctSound.currentTime = 0; 
+                    correctSound.play();
+                    document.getElementById(draggedElement.id + '1').style.visibility = 'visible';
+                    draggedElement.remove();
+                } else {
+                    incorrectSound.currentTime = 0; 
+                    incorrectSound.play();
+                }
+                draggedElement.style.opacity = '1';
+                dropzone.style.background = ''; // Restaurar a zona de soltura
+            }
+
+            function dragOver(e) {
+                e.preventDefault();
+            }
+
+            function drop(e) {
+                e.preventDefault();
+                const id = e.dataTransfer ? e.dataTransfer.getData('text') : draggedElement.id;
+                const draggableElement = document.getElementById(id);
+                const dropzone = e.target.closest('.caixa1, .caixa2');
+
+                if (dropzone && dropzone.id === draggableElement.dataset.target) {
+                    correctSound.currentTime = 0; 
+                    correctSound.play();
+                    document.getElementById(id + '1').style.visibility = 'visible';
+                    draggableElement.remove(); 
+                } else {
+                    incorrectSound.currentTime = 0; 
+                    incorrectSound.play();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
